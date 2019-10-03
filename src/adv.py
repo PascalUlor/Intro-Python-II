@@ -43,7 +43,7 @@ room['treasure'].s_to = room['narrow']
 #
 
 # Make a new player object that is currently in the 'outside' room.
-player1 = Player('Joe', 45, room['outside'], 'watch')
+player1 = Player('Joe', 45, room['outside'], [Item('bag', 'carrier bag')])
 
 
 print(player1)
@@ -51,8 +51,29 @@ print(player1)
 # Move method
 
 
-def get_items(room):
-    print(room)
+def get_items(room, tools):
+    print('++++', tools)
+    output = ""
+    output += "Items in room" + "\n"
+    i = 0
+    for c in tools:
+        output += "  " + str(i) + ". " + str(c) + "\n"
+        i += 1
+    # add an exit message
+    output += "  " + str(i) + ". Exit"
+    return output
+
+
+def get_inventory(tools):
+    output = ""
+    output += "Items in players inventory" + "\n"
+    i = 0
+    for c in tools:
+        output += "  " + str(i) + ". " + str(c) + "\n"
+        i += 1
+    # add an exit message
+    output += "  " + str(i) + ". Exit"
+    return output
 
 
 def move(atr, location):
@@ -62,6 +83,7 @@ def move(atr, location):
         return location
     else:
         print('You shall not pass')
+
 
        # Write a loop that:
        #
@@ -77,7 +99,8 @@ done = True
 
 
 while done:
-    print('==current room==', player1.current_room)
+    print('==current room==', player1.current_room,
+          player1.current_room.items, player1.item)
     if player1.current_room != None:
         print('==room description==', player1.current_room.description)
     else:
@@ -90,4 +113,7 @@ while done:
     elif s[0] in ['n', 's', 'e', 'w']:
         player1.current_room = move(s[0], player1.current_room)
     elif s[0] == 't':
-        get_items(player1.current_room.items[0])
+        player1.current_room.items = get_items(
+            player1.current_room, player1.current_room.items)
+    elif s[0] == 'i':
+        player1.item = get_inventory(player1.item)

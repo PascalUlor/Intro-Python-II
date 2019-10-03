@@ -15,11 +15,11 @@ class Room:
     def add_item(self, item):
         self.items.append(item)
 
-    def __str__(self):
-        return f"room {self.name}.\n{self.description} is located in the {self.directions} theres a {self.items} inside"
+    # def __str__(self):
+    #     return f"room {self.name}.\n{self.description} is located in the {self.directions} theres a {self.items} inside"
 
     def __repr__(self):
         return f"{self.name}, {self.description}, {self.directions}"
 
-location = Room('Eko', 'the cafeteria', 'n', 'guitar')
-print(location)
+# location = Room('Eko', 'the cafeteria', 'n', 'guitar')
+# print(location)

@@ -28,12 +28,12 @@ class Player:
     def add_item(self, item):
         self.item.append(item)
 
-    def __str__(self):
-        return f"Player {self.name} aged {self.age} is in {self.current_room} room. {self.item}"
+    # def __str__(self):
+    #     return f"Player {self.name} aged {self.age} is in {self.current_room} room. {self.item}"
 
     def __repr__(self):
         return f"{self.name}, {self.current_room}, {self.item}"
 
 
-s = Player('Tom', 23, 'Eko', 'Phone')
-print(s)
+# s = Player('Tom', 23, 'Eko', 'Phone')
+# print(s)

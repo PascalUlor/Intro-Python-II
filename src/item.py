@@ -13,11 +13,11 @@ class Item:
         self.name = name
         self.description = description
 
-    def __str__(self):
-        return f'List of items {self.name} and their descriptions {self.description}'
+    # def __str__(self):
+    #     return f'List of items {self.name} and their descriptions {self.description}'
 
     def __repr__(self):
         return f'{self.name}, {self.description}'
 
 
-item1 = Item('ps4', 'game console')
+# item1 = Item('ps4', 'game console')
