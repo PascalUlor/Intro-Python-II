@@ -4,7 +4,7 @@
 # then create a room and add the player to the room
 
 # import rooms for composition fields
-from room import Room
+# from room import Room
 
 
 class Player:
@@ -24,17 +24,11 @@ class Player:
         self.name = name
 
     def __str__(self):
-        output = ""
-        output += self.name + "\n" + "age" + self.age
-        i = 1
-        for c in self.current_room:
-            output += "  " + str(i) + ". " + c.name + "\n"
-            i += 1
+        return f"Player {self.name} aged {self.age} is in {self.current_room} room"
 
-        # add an exit message
-        output += "  " + str(i) + ". Exit"
-        return output
+    def __repr__(self):
+        return f"{self.name}, {self.current_room}"
 
 
-s = Player('Player 1', 'Eko', [Room('Big Apple', 'NYC', 'n'), Room(
-    'Gold Coast', 'Ghana', 's'), Room('Safari', 'SA', 'e'), Room('Naija', 'Nigeria', 'w')])
+s = Player('Tom', 23, 'Eko')
+print(s)
