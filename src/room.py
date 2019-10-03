@@ -17,5 +17,3 @@ class Room:
         return f"{self.name}, {self.description}, {self.directions}"
 
 location = Room('Eko', 'the cafeteria', 'n')
-
-print(location)

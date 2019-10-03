@@ -41,16 +41,43 @@ room['treasure'].s_to = room['narrow']
 # Make a new player object that is currently in the 'outside' room.
 player1 = Player('Joe', 45, room['outside'])
 
-print(player1)
-print('==player current room==', player1.current_room)
 
-# Write a loop that:
-#
-# * Prints the current room name
-# * Prints the current description (the textwrap module might be useful here).
-# * Waits for user input and decides what to do.
-#
-# If the user enters a cardinal direction, attempt to move to the room there.
-# Print an error message if the movement isn't allowed.
-#
-# If the user enters "q", quit the game.
+print(player1)
+
+# Move method
+
+
+def move(atr, location):
+    coord = atr+"_to"
+    if hasattr(location, coord):
+        location = getattr(location, coord)
+        return location
+    else:
+        print('You shall not pass')
+
+       # Write a loop that:
+       #
+       # * Prints the current room name
+       # * Prints the current description (the textwrap module might be useful here).
+       # * Waits for user input and decides what to do.
+       #
+       # If the user enters a cardinal direction, attempt to move to the room there.
+       # Print an error message if the movement isn't allowed.
+       #
+       # If the user enters "q", quit the game.
+done = True
+
+
+while done:
+    print('==current room==', player1.current_room)
+    if player1.current_room != None:
+        print('==room description==', player1.current_room.description)
+    else:
+        print('ROAD IS SHUT')
+
+    s = input("Command> ").lower().split()
+
+    if s[0] == 'q':
+        done = False
+    elif s[0] in ['n', 's', 'e', 'w']:
+        player1.current_room = move(s[0], player1.current_room)
