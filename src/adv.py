@@ -42,6 +42,7 @@ room['treasure'].s_to = room['narrow']
 player1 = Player('Joe', 45, room['outside'])
 
 print(player1)
+print('==player current room==', player1.current_room)
 
 # Write a loop that:
 #
