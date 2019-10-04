@@ -7,23 +7,23 @@ from item import Item
 room = {
     'outside':  Room("Outside Cave Entrance",
                      "North of you, the cave mount beckons", 'North',
-                     [Item('Mat', 'Carpet'), Item('Bell', 'Alert on arrival')]),
+                     [Item('mat', 'carpet'), Item('bell', 'alert on arrival')]),
 
     'foyer':    Room("Foyer", """Dim light filters in from the south. Dusty
 passages run north and east.""", 'North-East',
-                     [Item('Guitar', 'Musical instrument'), Item('Sofa', 'Confort')]),
+                     [Item('guitar', 'musical instrument'), Item('sofa', 'comfort')]),
 
     'overlook': Room("Grand Overlook", """A steep cliff appears before you, falling
 into the darkness. Ahead to the north, a light flickers in
 the distance, but there is no way across the chasm.""", 'North',
-                     [Item('Knife', 'Sharp edge'), Item('Kettle', 'Boil water')]),
+                     [Item('knife', 'sharp edge'), Item('kettle', 'boil water')]),
 
     'narrow':   Room("Narrow Passage", """The narrow passage bends here from west
-to north. The smell of gold permeates the air.""", 'West', [Item('Keys', 'Drive cars'), Item('Fan', 'Cools room')]),
+to north. The smell of gold permeates the air.""", 'West', [Item('keys', 'drive cars'), Item('fan', 'cools room')]),
 
     'treasure': Room("Treasure Chamber", """You've found the long-lost treasure
 chamber! Sadly, it has already been completely emptied by
-earlier adventurers. The only exit is to the south.""", 'East', [Item('Refrigerator', 'fridge'), Item('Laptop', 'Work tool')]),
+earlier adventurers. The only exit is to the south.""", 'East', [Item('refrigerator', 'fridge'), Item('laptop', 'Work tool')]),
 }
 
 
@@ -52,27 +52,26 @@ print(player1)
 
 
 def get_items(room, tools):
-    print('++++', tools)
     output = ""
     output += "Items in room" + "\n"
-    i = 0
+    i = 1
     for c in tools:
         output += "  " + str(i) + ". " + str(c) + "\n"
         i += 1
     # add an exit message
-    output += "  " + str(i) + ". Exit"
+    # output += "  " + str(i) + ". Exit"
     return output
 
 
 def get_inventory(tools):
     output = ""
     output += "Items in players inventory" + "\n"
-    i = 0
+    i = 1
     for c in tools:
         output += "  " + str(i) + ". " + str(c) + "\n"
         i += 1
     # add an exit message
-    output += "  " + str(i) + ". Exit"
+    # output += "  " + str(i) + ". Exit"
     return output
 
 
@@ -99,8 +98,7 @@ done = True
 
 
 while done:
-    print('==current room==', player1.current_room,
-          player1.current_room.items, player1.item)
+    print('==current room==', player1.current_room)
     if player1.current_room != None:
         print('==room description==', player1.current_room.description)
     else:
@@ -115,5 +113,23 @@ while done:
     elif s[0] == 't':
         player1.current_room.items = get_items(
             player1.current_room, player1.current_room.items)
+        print('==room items==', player1.current_room.items)
     elif s[0] == 'i':
-        player1.item = get_inventory(player1.item)
+        player1.items = get_inventory(player1.items)
+        print('==player inventory==', player1.items)
+    elif s[0] and s[1]:
+        action, item = s[0], s[1]
+        print('$$$', "".join(player1.current_room.items.split(",")).split())
+        if action == 'get' or action == 'take':
+            if item in player1.current_room.items:
+                removed_item = player1.current_room.remove_item(item)
+                player1.add_item(item)
+            else:
+                print('Item does not exist')
+
+        if action == 'drop':
+            if item in player1.items:
+                removed_item = player1.remove_item(item)
+                player1.current_room.add_item(item)
+            else:
+                print('Item is not in players invemtory')

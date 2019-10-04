@@ -9,11 +9,11 @@ from item import Item
 
 
 class Player:
-    def __init__(self, name, age, current_room, item):
+    def __init__(self, name, age, current_room, items):
         self.name = name
         self.age = age
         self.current_room = current_room
-        self.item = item
+        self.items = items
 
         # methods
 
@@ -26,13 +26,25 @@ class Player:
         self.name = name
 
     def add_item(self, item):
-        self.item.append(item)
+        self.items.append(item)
+
+    def remove_item(self, item_name):
+        new_items = []
+
+        for item in self.items:
+            if item.name.lower() == item_name:
+                removed_item = item
+            else:
+                new_items.append(item)
+
+            self.items = new_items
+            return removed_item
 
     # def __str__(self):
     #     return f"Player {self.name} aged {self.age} is in {self.current_room} room. {self.item}"
 
     def __repr__(self):
-        return f"{self.name}, {self.current_room}, {self.item}"
+        return f"{self.name}, {self.current_room}, {self.items}"
 
 
 # s = Player('Tom', 23, 'Eko', 'Phone')
