@@ -29,6 +29,13 @@ class Room:
             self.items = new_items
             return removed_item
 
+    def item_exist(self, item_name):
+        for item in self.items:
+            if item.name.lower() == item_name:
+                return True
+
+        return False
+
     # def __str__(self):
     #     return f"room {self.name}.\n{self.description} is located in the {self.directions} theres a {self.items} inside"
 

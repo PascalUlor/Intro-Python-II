@@ -111,17 +111,16 @@ while done:
     elif s[0] in ['n', 's', 'e', 'w']:
         player1.current_room = move(s[0], player1.current_room)
     elif s[0] == 't':
-        player1.current_room.items = get_items(
-            player1.current_room, player1.current_room.items)
-        print('==room items==', player1.current_room.items)
+     print('==room items==', get_items(
+            player1.current_room, player1.current_room.items))
     elif s[0] == 'i':
-        player1.items = get_inventory(player1.items)
-        print('==player inventory==', player1.items)
+        print('==player inventory==', get_inventory(player1.items))
     elif s[0] and s[1]:
         action, item = s[0], s[1]
-        print('$$$', "".join(player1.current_room.items.split(",")).split())
+        # print('$$$', "".join(player1.current_room.items.split(",")).split())
+        print(item, '$$', player1.current_room.items)
         if action == 'get' or action == 'take':
-            if item in player1.current_room.items:
+            if player1.current_room.item_exist(item):
                 removed_item = player1.current_room.remove_item(item)
                 player1.add_item(item)
             else:
